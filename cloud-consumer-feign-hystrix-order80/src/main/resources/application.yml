@@ -1,0 +1,33 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+
+
+feign:
+  hystrix:
+    enabled: true
+#  此处必须修改Hystrix的隔离策略，否则会一直调用服务降级
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+          strategy: SEMAPHORE
+
+# 单独在方法及controller中设定回滚方法时，需设定为false，测试服务器宕机设定为true
+# 需禁用feign自带的hystrix，否则调用超时方法会一直报错，且会一直调用回滚方法，课件可能有误
+# 设置feign客户端超时时间(OpenFeign默认支持ribbon)，不设置的话会一直调用回滚方法，因为ribbon默认1s
+ribbon:
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ReadTimeout: 10000
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
+  ConnectTimeout: 10000
+
+

@@ -9,8 +9,9 @@ spring:
       server:
         git:
           uri: https://github.com/wangzhiwei1454/springcloud-config.git #GitHub上面的git仓库名字
-          username: wangzhiwei1454
-          password: yifengshi14
+#          uri: git@github.com:wangzhiwei1454/springcloud-config.git #GitHub上面的git仓库名字
+#          username: wangzhiwei1454
+#          password: yifengshi14
           ####搜索目录
           search-paths:
             - springcloud-config

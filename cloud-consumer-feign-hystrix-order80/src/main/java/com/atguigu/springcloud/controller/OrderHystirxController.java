@@ -32,7 +32,7 @@ public class OrderHystirxController {
 //    @HystrixCommand(fallbackMethod = "paymentTimeOutFallbackMethod",commandProperties = {
 //            @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value="1500")
 //    })
-//    有HystrixCommand这个注解调用全局回滚，否则service实现类兜底
+//  service实现类兜底
     @HystrixCommand
     public String paymentInfo_TimeOut(@PathVariable("id") Integer id) {
 

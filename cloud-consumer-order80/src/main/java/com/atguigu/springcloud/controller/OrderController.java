@@ -27,7 +27,7 @@ public class OrderController {
     //单机版
     //public static final String PAYMENT_URL = "http://localhost:8001";
     //eureka集群
-    //@LoadBalanced //使用@LoadBalanced注解赋予RestTemplate负载均衡的能力,否则无法进行访问,基于ribbon
+    //@LoadBalanced //使用@LoadBalanced注解赋予RestTemplate负载均衡的能力,否则无法进行访问,基于ribbon,位于config
     public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
 
     @Resource
@@ -67,10 +67,9 @@ public class OrderController {
     private DiscoveryClient discoveryClient;
 
     @GetMapping("/consumer/payment/lb")
-    public String getPaymentLB()
-    {
-        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+    public String getPaymentLB() {
 
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
         if(instances == null || instances.size()<=0) {
             return null;
         }
@@ -80,4 +79,9 @@ public class OrderController {
         return restTemplate.getForObject(uri+"/payment/lb",String.class);
     }
 
+    // ====================> zipkin+sleuth
+    @GetMapping("/consumer/payment/zipkin")
+    public String paymentZipkin() {
+        return restTemplate.getForObject("http://localhost:8001"+"/payment/zipkin/", String.class);
+    }
 }

@@ -14,3 +14,23 @@
 /cloud-provider-payment8002/target/
 /cloud-provider-payment8004/target/
 /cloud-providerconsul-payment8006/target/
+# Except this file !.gitignore
+.classpath
+.project
+.settings
+target
+.idea
+.vscode
+.DS_Store
+.factorypath
+/logs
+*.iml
+*.log
+node_modules
+test/derby.log
+derby.log
+work
+test/logs
+derby.log
+yarn.lock
+.flattened-pom.xml
